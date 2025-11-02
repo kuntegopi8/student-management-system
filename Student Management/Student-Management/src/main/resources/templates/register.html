@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration | ERP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== General Page Setup ===== */
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* start at top for scrolling */
+            min-height: 100vh; /* ensure full viewport height */
+            margin: 0;
+            overflow-y: auto; /* ✅ Enable vertical scrolling */
+            padding: 40px 0; /* spacing top-bottom */
+        }
+
+        /* ===== Form Container ===== */
+        .container {
+            background: #fff;
+            padding: 35px 40px;
+            border-radius: 12px;
+            width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        /* ===== Headings ===== */
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* ===== Form Fields ===== */
+        label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* ===== Buttons ===== */
+        button {
+            width: 100%;
+            background-color: #6a82fb;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #5a72e8;
+        }
+
+        /* ===== Messages ===== */
+        .message {
+            text-align: center;
+            color: green;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            text-align: center;
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* ===== Back to Login Link ===== */
+        .back-to-login {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-to-login a {
+            color: #6a82fb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-to-login a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Student Registration Form</h2>
+
+    <!-- ✅ Success / Error messages -->
+    <div th:if="${message}" class="message" th:text="${message}"></div>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <form th:action="@{/register}" th:object="${student}" method="post">
+
+        <label>Full Name</label>
+        <input type="text" th:field="*{fullName}" placeholder="Enter your full name" required>
+
+        <label>Gender</label>
+        <select th:field="*{gender}" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Date of Birth</label>
+        <input type="date" th:field="*{dateOfBirth}" required>
+
+        <label>Phone Number</label>
+        <input type="text" th:field="*{phone}" placeholder="Enter phone number" required>
+
+        <label>Email Address</label>
+        <input type="email" th:field="*{email}" placeholder="Enter email address" required>
+
+        <label>Student ID</label>
+        <input type="text" th:field="*{studentId}" placeholder="Enter student ID" required>
+
+        <label>Department</label>
+        <input type="text" th:field="*{department}" placeholder="Enter department" required>
+
+        <label>Year</label>
+        <select th:field="*{year}" required>
+            <option value="">Select Year</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+        </select>
+
+        <label>Semester</label>
+        <select th:field="*{semester}" required>
+            <option value="">Select Semester</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+
+        <label>Username</label>
+        <input type="text" th:field="*{username}" placeholder="Choose a username" required>
+
+        <label>Password</label>
+        <input type="password" th:field="*{password}" placeholder="Enter password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- ✅ Back to Login link -->
+    <div class="back-to-login">
+        <a th:href="@{/login}">Already registered? Go to Login</a>
+    </div>
+</div>
+</body>
+</html>
